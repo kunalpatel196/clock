@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CLOCK</title>
+    <link rel="icon" href="3d-alarm.png">
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            font-family: 'poppins',sans-serif;
+            box-sizing: border-box;
+        }
+        .hero{
+            width: 100%;
+            min-height: 100vh;
+            background: linear-gradient(45deg,#08001f,#30197d);
+            color: #fff;
+            position: relative;
+        }
+        .container{
+            width: 800px;
+            height: 180px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+        }
+        .clock{
+            width: 100%;
+            height: 100%;
+            background: rgba(235, 0, 255, .11);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content:center;
+            font-size: 5rem;
+            backdrop-filter:blur(40px) ;
+        }
+        .container::before {
+            content: "";
+            width: 180px;
+            height: 180px;
+            background: #f41b75;
+            position: absolute;
+            border-radius: 5px;
+            position: absolute;
+            left: -50px;
+            top: -50px;
+            z-index: -1;
+            animation: rotateBefore 10s infinite linear;
+        }
+        .container::after {
+            content: "";
+            width: 180px;
+            height: 180px;
+            background: #419aff;
+            position: absolute;
+           
+            position: absolute;
+            bottom: -50px;
+            right: -30px;
+            z-index: -1;
+            animation: rotateClock 6s infinite linear;
+            transform-origin: center center;
+        }
+    
+        @keyframes rotateClock {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+        .clock span{
+            font-size: 80px;
+            width: 110px;
+            display: inline-block;
+            text-align: center;
+            position: relative;
+        }
+        .clock span::after{
+            font-size: 16px;
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        #hrs::after{
+            content: 'HOURS';
+        }
+        #min::after{
+            content: 'MINS';
+        }
+        #sec::after{
+            content: 'SEC';
+        }
+        @keyframes rotateBefore {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <div class="hero">
+        <div class="container">
+            <div class="clock">
+                <span id="hrs">00</span>
+                <span >:</span>
+                <span id="min">00</span>
+                <span>:</span>
+                <span id="sec">00</span>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    let hrs=document.getElementById("hrs");
+    let min=document.getElementById("min");
+    let sec=document.getElementById("sec");
+    
+    setInterval(()=>{
+        let current=new Date();
+        hrs.innerHTML=(current.getHours()<10?"0":"") + current.getHours();
+        min.innerHTML=(current.getMinutes()<10?"0":"") + current.getMinutes();
+        sec.innerHTML=(current.getSeconds()<10?"0":"") + current.getSeconds();
+    },1000)
+    
+</script>
+</html>
